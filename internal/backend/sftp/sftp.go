@@ -186,7 +186,7 @@ func (r *SFTP) mkdirAllDataSubdirs(ctx context.Context, nconn uint) error {
 			if err := r.Mkdir(d); err == nil {
 				return nil
 			}
-			return r.MkdirAll(ctx, d, nconn)
+			return r.MkdirAll(d)
 		})
 	}
 
@@ -629,7 +629,7 @@ func (r *SFTP) Mkdir(path string) error {
 // MkdirAll creates a directory named path, along with any necessary parents.
 // If path is already a directory, MkdirAll does nothing and returns nil.
 // If path exists but is a file, an error is returned.
-func (r *SFTP) MkdirAll(ctx context.Context, path string, _ uint) error {
+func (r *SFTP) MkdirAll(path string) error {
 	if err := r.clientError(); err != nil {
 		return err
 	}
